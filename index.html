@@ -4,27 +4,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080b14">
+<meta name="theme-color" content="#ffffff">
 
-<title>İlker | Engineering Journal</title>
+<title>İlker TSKN | Developer Journal</title>
+<meta name="description" content="İlker'in yazılım geliştirme günlüğü, .NET, EF Core ve açık kaynak katkıları.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --bg: #080b14;
-  --surface: #101522;
-  --surface2: #141c2c;
-  --border: rgba(148,163,184,.13);
-  --text: #f1f5f9;
-  --muted: #8994a8;
-  --blue: #60a5fa;
-  --purple: #a78bfa;
-  --green: #4ade80;
-  --red: #fb7185;
-  --radius: 18px;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-soft: #f8f9fc;
+  --text: #172033;
+  --muted: #687386;
+  --blue: #3456a6;
+  --blue-dark: #233f80;
+  --purple: #7654bb;
+  --border: #e5e9f0;
+  --green: #16834a;
+  --red: #c83d4d;
+  --shadow: 0 3px 14px rgba(20,35,65,.045);
 }
 
 * {
@@ -37,22 +39,10 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
+  font-family: Inter, sans-serif;
   color: var(--text);
-  font-family: 'Inter', sans-serif;
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse at 15% 5%, rgba(37,99,235,.13), transparent 35%),
-    radial-gradient(ellipse at 85% 25%, rgba(139,92,246,.10), transparent 35%);
+  background: var(--bg);
+  line-height: 1.65;
 }
 
 a {
@@ -60,27 +50,26 @@ a {
   text-decoration: none;
 }
 
-button {
+button, input {
   font: inherit;
 }
 
 /* NAVIGATION */
 
 .navbar {
-  height: 76px;
+  height: 72px;
+  background: #fff;
   border-bottom: 1px solid var(--border);
-  background: rgba(8,11,20,.82);
-  backdrop-filter: blur(20px);
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
 .nav-inner {
-  max-width: 1120px;
+  max-width: 1160px;
   height: 100%;
   margin: auto;
-  padding: 0 24px;
+  padding: 0 25px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -89,470 +78,393 @@ button {
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 11px;
+  font-size: 18px;
   font-weight: 800;
-  letter-spacing: -.5px;
+  letter-spacing: -.6px;
 }
 
-.brand-icon {
-  width: 37px;
-  height: 37px;
-  border-radius: 11px;
+.brand-mark {
+  width: 36px;
+  height: 36px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg,#2563eb,#9333ea);
-  font-family: 'DM Mono',monospace;
-  font-size: 17px;
+  border-radius: 8px;
+  background: #283e79;
   color: white;
-  box-shadow: 0 4px 20px #2563eb44;
+  font-family: monospace;
+  font-size: 17px;
 }
 
 .nav-links {
   display: flex;
-  gap: 30px;
   align-items: center;
-  color: var(--muted);
+  gap: 30px;
   font-size: 13px;
+  font-weight: 600;
+  color: #536075;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--blue);
+}
+
+.nav-actions {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+
+.lang-btn {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 7px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.lang-btn:hover {
+  border-color: var(--blue);
+}
+
+.github-nav {
+  padding: 9px 15px;
+  background: #253d78;
+  color: white;
+  border-radius: 7px;
+  font-size: 12px;
   font-weight: 600;
 }
 
-.nav-links a:hover {
-  color: white;
+.github-nav:hover {
+  background: #1b2e60;
 }
 
-.github-button {
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: 9px;
-  padding: 9px 15px;
+/* HERO */
+
+.hero {
+  background:
+    radial-gradient(ellipse at 90% 10%, rgba(115,85,190,.25), transparent 38%),
+    linear-gradient(110deg,#17294e,#293f79 65%,#4b438c);
+  color: white;
+  padding: 72px 25px;
+}
+
+.hero-inner {
+  max-width: 1110px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 45px;
+}
+
+.hero-content {
+  max-width: 680px;
+}
+
+.hero-label {
+  display: inline-block;
+  padding: 6px 11px;
+  border: 1px solid #ffffff35;
+  border-radius: 4px;
+  color: #d8def5;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(35px,5vw,54px);
+  line-height: 1.18;
+  letter-spacing: -2px;
+  margin: 0 0 17px;
+  font-weight: 800;
+}
+
+.hero h1 span {
+  color: #c7b5fa;
+}
+
+.hero-description {
+  color: #d5dced;
+  font-size: 14px;
+  line-height: 1.9;
+  max-width: 590px;
+  margin: 0 0 25px;
+}
+
+.hero-links {
+  display: flex;
+  gap: 11px;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 11px 17px;
+  border-radius: 6px;
   font-size: 12px;
   font-weight: 700;
   transition: .2s;
 }
 
-.github-button:hover {
-  border-color: var(--blue);
-  background: #1d293b;
+.hero-btn.primary {
+  background: white;
+  color: #263e79;
 }
 
-/* HERO */
+.hero-btn.secondary {
+  border: 1px solid #ffffff60;
+  color: white;
+}
+
+.hero-btn:hover {
+  transform: translateY(-2px);
+}
+
+.hero-profile {
+  min-width: 210px;
+  text-align: center;
+}
+
+.hero-avatar {
+  width: 105px;
+  height: 105px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ffffff35;
+  margin-bottom: 13px;
+}
+
+.hero-profile h3 {
+  font-size: 17px;
+  margin: 0;
+}
+
+.hero-profile p {
+  color: #d4d9ed;
+  font-size: 12px;
+  margin: 4px 0;
+}
+
+/* MAIN LAYOUT */
 
 .container {
-  max-width: 1120px;
-  padding: 0 24px;
-  margin: auto;
+  max-width: 1160px;
+  padding: 0 25px;
+  margin: 0 auto;
 }
 
-.hero {
-  padding: 105px 0 75px;
-  position: relative;
+.main-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  gap: 35px;
+  padding-top: 45px;
+  padding-bottom: 75px;
 }
 
-.availability {
-  display: inline-flex;
+.section-title {
+  display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 7px 13px;
-  background: rgba(74,222,128,.07);
-  border: 1px solid rgba(74,222,128,.2);
-  color: #86efac;
-  border-radius: 30px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .5px;
-  margin-bottom: 28px;
-}
-
-.pulse {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 12px var(--green);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  50% { opacity: .35; }
-}
-
-.hero h1 {
-  font-size: clamp(42px,7vw,78px);
-  line-height: 1.08;
-  letter-spacing: -4px;
-  font-weight: 900;
-  margin: 0;
-  max-width: 850px;
-}
-
-.gradient-text {
-  background: linear-gradient(100deg,#60a5fa 10%,#a78bfa 55%,#e879f9);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.hero-description {
-  color: var(--muted);
-  font-size: 16px;
-  max-width: 570px;
-  margin: 25px 0 30px;
-  line-height: 1.9;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.primary-btn,
-.secondary-btn {
-  padding: 13px 19px;
-  border-radius: 10px;
-  font-size: 13px;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  transition: .25s;
-}
-
-.primary-btn {
-  background: linear-gradient(110deg,#2563eb,#7c3aed);
-  color: white;
-  box-shadow: 0 7px 25px #4f46e533;
-}
-
-.primary-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px #4f46e555;
-}
-
-.secondary-btn {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--text);
-}
-
-.secondary-btn:hover {
-  border-color: var(--blue);
-}
-
-/* CODE DECORATION */
-
-.hero-code {
-  position: absolute;
-  right: 20px;
-  top: 125px;
-  width: 285px;
-  padding: 20px;
-  background: rgba(16,21,34,.85);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  transform: rotate(2deg);
-  box-shadow: 0 25px 70px #0005;
-}
-
-.code-dots {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 17px;
-}
-
-.code-dots i {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #fb7185;
-}
-
-.code-dots i:nth-child(2) { background: #fbbf24; }
-.code-dots i:nth-child(3) { background: #4ade80; }
-
-.hero-code pre {
-  margin: 0;
-  font: 11px/2 'DM Mono',monospace;
-  color: #94a3b8;
-  white-space: pre-wrap;
-}
-
-.code-blue { color: #60a5fa; }
-.code-purple { color: #c4b5fd; }
-.code-green { color: #86efac; }
-
-/* SECTION */
-
-.section {
-  padding: 35px 0 75px;
-}
-
-.section-heading {
-  display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  gap: 20px;
-  margin-bottom: 25px;
+  gap: 15px;
+  margin-bottom: 22px;
 }
 
-.eyebrow {
-  font: 11px 'DM Mono',monospace;
-  color: var(--blue);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 9px;
-}
-
-.section-heading h2 {
-  font-size: 29px;
-  letter-spacing: -1px;
+.section-title h2 {
+  font-size: 22px;
   margin: 0;
+  letter-spacing: -.7px;
 }
 
-.section-subtitle {
+.section-title p {
   color: var(--muted);
-  font-size: 12px;
-  margin-top: 7px;
+  font-size: 11px;
+  margin: 5px 0 0;
 }
 
-/* STATS */
+.section-indicator {
+  width: 4px;
+  height: 25px;
+  border-radius: 3px;
+  background: var(--purple);
+  display: inline-block;
+  margin-right: 11px;
+  vertical-align: middle;
+}
+
+.view-all {
+  font-size: 12px;
+  color: var(--blue);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* STATISTICS */
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4,1fr);
-  gap: 14px;
-  margin-bottom: 75px;
+  gap: 11px;
+  margin-bottom: 35px;
 }
 
 .stat-card {
-  background: linear-gradient(145deg,#111827,#0d1220);
+  padding: 16px;
   border: 1px solid var(--border);
-  padding: 22px;
-  border-radius: var(--radius);
-  transition: .25s;
-}
-
-.stat-card:hover {
-  transform: translateY(-4px);
-  border-color: #60a5fa55;
-}
-
-.stat-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.stat-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  font-size: 15px;
-  background: #2563eb18;
-}
-
-.stat-number {
-  font-size: 35px;
-  font-weight: 800;
-  letter-spacing: -2px;
-  margin-top: 13px;
+  border-radius: 8px;
+  background: white;
 }
 
 .stat-label {
-  font-size: 12px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .5px;
   color: var(--muted);
-  font-weight: 600;
 }
 
-/* CONTRIBUTION */
-
-.contribution {
-  border: 1px solid var(--border);
-  background: linear-gradient(120deg,#111827,#12172a);
-  padding: 25px;
-  border-radius: var(--radius);
-  margin-bottom: 75px;
+.stat-number {
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-top: 5px;
 }
 
-.contribution-header {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.contribution-header h3 {
-  margin: 0;
-  font-size: 15px;
-}
-
-.contribution-header span {
+.stat-detail {
   color: var(--muted);
-  font: 11px 'DM Mono',monospace;
+  font-size: 10px;
 }
 
-.contribution-grid {
-  display: grid;
-  grid-template-columns: repeat(26,1fr);
-  gap: 5px;
-}
-
-.contribution-cell {
-  height: 12px;
-  background: #1e293b;
-  border-radius: 3px;
-}
-
-.contribution-cell.level-1 { background: #164e63; }
-.contribution-cell.level-2 { background: #0e7490; }
-.contribution-cell.level-3 { background: #0891b2; }
-.contribution-cell.level-4 { background: #22d3ee; }
-
-.contribution-note {
-  color: var(--muted);
-  font-size: 11px;
-  margin-top: 14px;
-}
-
-/* PR BLOG */
-
-.blog-section {
-  padding-bottom: 100px;
-}
+/* BLOG */
 
 .blog-toolbar {
   display: flex;
-  gap: 12px;
+  align-items: center;
+  gap: 10px;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 23px;
+  margin-bottom: 15px;
 }
 
 .search-box {
-  flex: 1;
-  min-width: 200px;
-  max-width: 330px;
   position: relative;
+  flex: 1;
+  min-width: 180px;
 }
 
 .search-box input {
   width: 100%;
-  padding: 12px 15px 12px 40px;
-  border-radius: 10px;
-  background: var(--surface);
+  height: 39px;
   border: 1px solid var(--border);
-  color: white;
+  border-radius: 6px;
+  padding: 0 12px 0 35px;
   outline: none;
-  font: 12px Inter,sans-serif;
+  font-size: 11px;
+  background: #fff;
 }
 
 .search-box input:focus {
   border-color: var(--blue);
 }
 
-.search-icon {
+.search-symbol {
   position: absolute;
-  left: 14px;
-  top: 9px;
-  color: var(--muted);
+  left: 12px;
+  top: 8px;
+  color: #8792a5;
 }
 
 .filters {
   display: flex;
-  gap: 7px;
-  flex-wrap: wrap;
+  gap: 5px;
 }
 
 .filter-btn {
-  padding: 10px 14px;
+  background: white;
   border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--muted);
-  border-radius: 9px;
-  font-size: 11px;
-  font-weight: 700;
+  border-radius: 5px;
+  padding: 8px 11px;
+  font-size: 10px;
+  color: #647084;
   cursor: pointer;
-  transition: .2s;
 }
 
-.filter-btn:hover,
-.filter-btn.active {
-  background: #2563eb20;
-  border-color: #3b82f6;
-  color: #93c5fd;
+.filter-btn.active,
+.filter-btn:hover {
+  background: #edf1fa;
+  border-color: #b9c6e5;
+  color: #2d4c91;
 }
 
-.blog-meta {
+.feed-info {
+  font-family: 'Roboto Mono', monospace;
+  color: var(--muted);
+  font-size: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 13px;
   display: flex;
   justify-content: space-between;
-  color: var(--muted);
-  font: 11px 'DM Mono',monospace;
-  margin-bottom: 15px;
 }
+
+/* POST CARDS */
 
 #blog-feed {
   display: grid;
-  gap: 14px;
+  gap: 13px;
 }
 
 .post-card {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(130deg,#111827,#0e1421);
   border: 1px solid var(--border);
-  border-radius: 15px;
-  padding: 23px;
-  transition: .25s;
-  animation: fadeIn .45s ease both;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  border-radius: 9px;
+  background: white;
+  padding: 20px;
+  transition: border-color .2s, box-shadow .2s;
 }
 
 .post-card:hover {
-  transform: translateY(-3px);
-  border-color: #60a5fa55;
-  box-shadow: 0 15px 35px #0003;
+  border-color: #bdc9e2;
+  box-shadow: var(--shadow);
 }
 
-.post-top {
+.post-meta {
   display: flex;
-  justify-content: space-between;
-  gap: 12px;
   align-items: center;
-  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 .post-author {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 7px;
+  font-size: 10px;
   color: var(--muted);
-  font-size: 11px;
 }
 
 .post-author img {
-  width: 32px;
-  height: 32px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
-  border: 1px solid var(--border);
 }
 
 .post-date {
-  font: 10px 'DM Mono',monospace;
+  font-size: 10px;
   color: var(--muted);
 }
 
 .post-title {
-  font-size: 19px;
-  line-height: 1.4;
-  letter-spacing: -.5px;
-  margin: 0 0 9px;
+  font-size: 17px;
+  line-height: 1.5;
+  font-weight: 700;
+  margin: 0 0 8px;
+  letter-spacing: -.3px;
 }
 
 .post-title a:hover {
@@ -560,86 +472,240 @@ button {
 }
 
 .post-excerpt {
-  color: var(--muted);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.8;
-  margin: 0 0 20px;
+  color: #6d7788;
+  margin: 0 0 16px;
   white-space: pre-line;
   overflow-wrap: anywhere;
 }
 
-.post-bottom {
+.post-footer {
+  border-top: 1px solid #edf0f4;
+  padding-top: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
   flex-wrap: wrap;
-  border-top: 1px solid var(--border);
-  padding-top: 15px;
+  gap: 10px;
 }
 
 .tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.tag-open {
+  background: #e5f6eb;
+  color: #16834a;
+}
+
+.tag-merged {
+  background: #f0eafa;
+  color: #7654bb;
+}
+
+.tag-closed {
+  background: #fce9eb;
+  color: #c83d4d;
+}
+
+.tag-label {
+  background: #edf1f8;
+  color: #50627f;
+}
+
+.read-more {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.side-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.side-title {
+  font-size: 15px;
+  font-weight: 800;
+  margin: 0 0 17px;
+}
+
+.profile-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-row img {
+  width: 57px;
+  height: 57px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-row strong {
+  display: block;
+  font-size: 13px;
+}
+
+.profile-row span {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.profile-description {
+  color: #687386;
+  font-size: 11px;
+  line-height: 1.9;
+  margin: 17px 0;
+}
+
+.social-links {
+  display: flex;
+  gap: 9px;
+}
+
+.social-links a {
+  padding: 7px 11px;
+  background: #f0f3f9;
+  color: #344e83;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 5px;
+}
+
+.social-links a:hover {
+  background: #e3eafa;
+}
+
+.tech-list {
   display: flex;
   flex-wrap: wrap;
   gap: 7px;
 }
 
-.tag {
-  font: 10px 'DM Mono',monospace;
-  padding: 5px 9px;
-  border-radius: 6px;
-  border: 1px solid transparent;
+.tech-item {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  background: #fafbfc;
+  border-radius: 5px;
+  font-size: 10px;
+  color: #4b5870;
+  font-weight: 600;
 }
 
-.tag-open {
-  background: #22c55e12;
-  color: #4ade80;
-  border-color: #22c55e30;
-}
-
-.tag-merged {
-  background: #a78bfa15;
-  color: #c4b5fd;
-  border-color: #a78bfa35;
-}
-
-.tag-closed {
-  background: #fb718515;
-  color: #fb7185;
-  border-color: #fb718535;
-}
-
-.tag-label {
-  background: #33415555;
-  color: #cbd5e1;
-  border-color: #64748b30;
-}
-
-.read-more {
-  color: #93c5fd;
+.archive-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-bottom: 1px solid #edf0f4;
   font-size: 11px;
-  font-weight: 700;
+  color: #56647a;
 }
 
-.read-more:hover {
-  color: white;
+.archive-item:last-child {
+  border: 0;
 }
 
-/* LOADING */
+.archive-count {
+  color: var(--muted);
+  font-family: monospace;
+}
+
+/* CONTRIBUTION */
+
+.contribution-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 17px;
+  margin-top: 18px;
+  background: white;
+}
+
+.contribution-card h3 {
+  font-size: 13px;
+  margin: 0 0 5px;
+}
+
+.contribution-description {
+  color: var(--muted);
+  font-size: 10px;
+  margin-bottom: 14px;
+}
+
+.contribution-grid {
+  display: grid;
+  grid-template-columns: repeat(26,minmax(0,1fr));
+  gap: 3px;
+}
+
+.contribution-cell {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: #edf0f5;
+}
+
+.contribution-cell.level-1 { background: #d7e2f7; }
+.contribution-cell.level-2 { background: #a5bee9; }
+.contribution-cell.level-3 { background: #648ccf; }
+.contribution-cell.level-4 { background: #3456a6; }
+
+.contribution-legend {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 9px;
+  margin-top: 10px;
+}
+
+.contribution-legend .contribution-cell {
+  width: 10px;
+}
+
+/* STATUS */
 
 .loading {
-  padding: 60px 20px;
+  padding: 45px 15px;
   text-align: center;
   color: var(--muted);
+  font-size: 12px;
 }
 
-.loader {
-  width: 30px;
-  height: 30px;
-  border: 3px solid #334155;
-  border-top-color: #60a5fa;
+.loading::before {
+  content: "";
+  display: block;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #e1e6f0;
+  border-top-color: var(--blue);
   border-radius: 50%;
-  margin: 0 auto 15px;
+  margin: 0 auto 12px;
   animation: spin .8s linear infinite;
 }
 
@@ -647,104 +713,150 @@ button {
   to { transform: rotate(360deg); }
 }
 
+.error,
 .empty {
-  text-align: center;
-  padding: 50px;
-  color: var(--muted);
-  background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 15px;
+  border-radius: 8px;
+  background: var(--surface-soft);
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
 }
 
 .error {
-  color: #fb7185;
-  text-align: center;
-  padding: 30px;
-  border: 1px solid #fb718533;
-  border-radius: 15px;
-  background: #fb718508;
-}
-
-/* ABOUT */
-
-.about-card {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 25px;
-  align-items: center;
-  background: linear-gradient(120deg,#14213b,#201633);
-  border: 1px solid #64748b30;
-  border-radius: 20px;
-  padding: 32px;
-  margin-bottom: 85px;
-}
-
-.about-card h2 {
-  font-size: 25px;
-  letter-spacing: -1px;
-  margin: 0 0 10px;
-}
-
-.about-card p {
-  color: #aab5c8;
-  font-size: 12px;
-  line-height: 1.9;
-  max-width: 580px;
-}
-
-.about-code {
-  font: 12px 'DM Mono',monospace;
-  color: #93c5fd;
-  background: #080b1488;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #64748b30;
+  color: #bd3e4b;
 }
 
 /* FOOTER */
 
 footer {
   border-top: 1px solid var(--border);
-  padding: 27px 20px;
-  color: var(--muted);
-  font-size: 11px;
+  background: #fafbfc;
+  padding: 25px;
 }
 
 .footer-inner {
-  max-width: 1120px;
+  max-width: 1110px;
   margin: auto;
   display: flex;
   justify-content: space-between;
   gap: 15px;
   flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 10px;
 }
 
 .footer-inner a {
-  color: #93c5fd;
+  color: var(--blue);
+  font-weight: 700;
 }
 
 @media(max-width:900px) {
-  .hero-code { display:none; }
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .hero-profile {
+    min-width: 150px;
+  }
 }
 
-@media(max-width:650px) {
-  .nav-links { gap: 13px; }
-  .nav-links a:nth-child(2) { display:none; }
-  .hero { padding:75px 0 55px; }
-  .hero h1 { letter-spacing:-2px; }
-  .stats-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
-  .stat-card { padding:16px; }
-  .stat-number { font-size:29px; }
-  .section-heading { align-items:flex-start; flex-direction:column; }
-  .contribution { padding:16px; }
-  .contribution-grid { gap:3px; }
-  .contribution-cell { height:8px; }
-  .about-card { grid-template-columns:1fr; padding:23px; }
-  .about-code { display:none; }
-  .post-card { padding:18px; }
-  .blog-toolbar { flex-direction:column; }
-  .search-box { max-width:none; }
-  .post-date { display:none; }
+@media(max-width:600px) {
+  .navbar {
+    height: auto;
+  }
+
+  .nav-inner {
+    min-height: 65px;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px 18px;
+  }
+
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 11px;
+  }
+
+  .nav-actions {
+    margin-left: auto;
+  }
+
+  .hero {
+    padding: 48px 20px;
+  }
+
+  .hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+  }
+
+  .hero-avatar {
+    width: 65px;
+    height: 65px;
+    margin: 0;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+    letter-spacing: -1.5px;
+  }
+
+  .container {
+    padding: 0 17px;
+  }
+
+  .main-layout {
+    padding-top: 30px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .sidebar {
+    display: flex;
+  }
+
+  .post-card {
+    padding: 16px;
+  }
+
+  .post-title {
+    font-size: 15px;
+  }
+
+  .blog-toolbar {
+    align-items: stretch;
+  }
+
+  .filters {
+    overflow-x: auto;
+  }
+
+  .filter-btn {
+    white-space: nowrap;
+  }
+
+  .feed-info {
+    font-size: 9px;
+  }
 }
 </style>
 </head>
@@ -752,272 +864,323 @@ footer {
 <body>
 
 <!-- NAVIGATION -->
+
 <nav class="navbar">
   <div class="nav-inner">
-    <a class="brand" href="#">
-      <span class="brand-icon">&lt;/&gt;</span>
-      <span>ilkertskn<span style="color:#60a5fa">.</span></span>
+
+    <a href="#" class="brand">
+      <span class="brand-mark">&lt;/&gt;</span>
+      <span>İlker TSKN</span>
     </a>
 
     <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#activity">Activity</a>
-      <a href="#journal">Journal</a>
-      <a class="github-button"
-         href="https://github.com/ilkertskn"
-         target="_blank" rel="noopener noreferrer">
-        GitHub ↗
+      <a href="#home" data-i18n="navHome">Ana Sayfa</a>
+      <a href="#journal" class="active" data-i18n="navBlog">Blog</a>
+      <a href="https://github.com/ilkertskn" target="_blank">GitHub ↗</a>
+      <a href="#about" data-i18n="navAbout">Hakkımda</a>
+    </div>
+
+    <div class="nav-actions">
+      <button class="lang-btn" id="langToggle" onclick="toggleLanguage()">EN</button>
+      <a href="https://github.com/ilkertskn"
+         target="_blank" class="github-nav">
+        GitHub
       </a>
     </div>
+
   </div>
 </nav>
 
-<div class="container">
-
 <!-- HERO -->
-<section class="hero">
 
-  <div class="availability">
-    <span class="pulse"></span>
-    SOFTWARE ENGINEERING JOURNAL
-  </div>
+<header class="hero" id="home">
+  <div class="hero-inner">
 
-  <h1>
-    Building things<br>
-    that <span class="gradient-text">matter.</span>
-  </h1>
+    <div class="hero-content">
 
-  <p class="hero-description">
-    Hi, I'm İlker. I enjoy building software, exploring new technologies
-    and contributing to open-source projects.
-    This is where I document my engineering journey,
-    contributions and things I build along the way.
-  </p>
-
-  <div class="hero-actions">
-    <a href="#journal" class="primary-btn">
-      Explore my work <span>↓</span>
-    </a>
-
-    <a href="https://github.com/ilkertskn"
-       target="_blank" rel="noopener noreferrer"
-       class="secondary-btn">
-      GitHub Profile ↗
-    </a>
-  </div>
-
-  <div class="hero-code">
-    <div class="code-dots">
-      <i></i><i></i><i></i>
-    </div>
-    <pre><span class="code-purple">const</span> developer = {
-  name: <span class="code-green">"İlker"</span>,
-  focus: <span class="code-green">"Software"</span>,
-  passion: <span class="code-green">"Open Source"</span>,
-  learning: <span class="code-blue">true</span>,
-  building: <span class="code-blue">true</span>
-};</pre>
-  </div>
-
-</section>
-
-<!-- STATISTICS -->
-<section class="section" id="activity">
-
-  <div class="section-heading">
-    <div>
-      <div class="eyebrow">01 / ACTIVITY</div>
-      <h2>Open source activity.</h2>
-      <div class="section-subtitle">
-        My contributions to dotnet/efcore in 2026.
+      <div class="hero-label" data-i18n="heroLabel">
+        SOFTWARE DEVELOPMENT JOURNAL
       </div>
-    </div>
-  </div>
 
-  <div class="stats-grid">
+      <h1>
+        <span data-i18n="heroTitle">Geliştirme Günlüğü</span>
+      </h1>
 
-    <div class="stat-card">
-      <div class="stat-top">
-        <span class="stat-label">TOTAL PULL REQUESTS</span>
-        <span class="stat-icon">⌘</span>
-      </div>
-      <div class="stat-number" id="total-count">—</div>
-      <div class="stat-label">Contributions</div>
-    </div>
-
-    <div class="stat-card">
-      <div class="stat-top">
-        <span class="stat-label">MERGED</span>
-        <span class="stat-icon">✓</span>
-      </div>
-      <div class="stat-number" id="merged-count">—</div>
-      <div class="stat-label">Successfully merged</div>
-    </div>
-
-    <div class="stat-card">
-      <div class="stat-top">
-        <span class="stat-label">OPEN</span>
-        <span class="stat-icon">◉</span>
-      </div>
-      <div class="stat-number" id="open-count">—</div>
-      <div class="stat-label">Under review</div>
-    </div>
-
-    <div class="stat-card">
-      <div class="stat-top">
-        <span class="stat-label">CLOSED</span>
-        <span class="stat-icon">↗</span>
-      </div>
-      <div class="stat-number" id="closed-count">—</div>
-      <div class="stat-label">Closed PRs</div>
-    </div>
-
-  </div>
-
-  <!-- CONTRIBUTION VISUAL -->
-  <div class="contribution">
-    <div class="contribution-header">
-      <h3>Contribution activity</h3>
-      <span id="contribution-year">2026</span>
-    </div>
-
-    <div class="contribution-grid" id="contribution-grid"></div>
-
-    <div class="contribution-note">
-      Visual activity based on PR creation dates shown below.
-      This is not GitHub's official contribution graph.
-    </div>
-  </div>
-
-</section>
-
-<!-- JOURNAL -->
-<section class="blog-section" id="journal">
-
-  <div class="section-heading">
-    <div>
-      <div class="eyebrow">02 / ENGINEERING JOURNAL</div>
-      <h2>Things I've worked on.</h2>
-      <div class="section-subtitle">
-        A collection of my open-source contributions and pull requests.
-      </div>
-    </div>
-  </div>
-
-  <div class="blog-toolbar">
-
-    <div class="search-box">
-      <span class="search-icon">⌕</span>
-      <input
-        type="search"
-        id="search"
-        placeholder="Search contributions..."
-        oninput="renderPRs()"
-      >
-    </div>
-
-    <div class="filters">
-      <button class="filter-btn active"
-              data-filter="all"
-              onclick="setFilter('all',this)">
-        All
-      </button>
-
-      <button class="filter-btn"
-              data-filter="merged"
-              onclick="setFilter('merged',this)">
-        Merged
-      </button>
-
-      <button class="filter-btn"
-              data-filter="open"
-              onclick="setFilter('open',this)">
-        Open
-      </button>
-
-      <button class="filter-btn"
-              data-filter="closed"
-              onclick="setFilter('closed',this)">
-        Closed
-      </button>
-    </div>
-
-  </div>
-
-  <div class="blog-meta">
-    <span id="result-count">Loading contributions...</span>
-    <span>DOTNET / EFCORE</span>
-  </div>
-
-  <div id="blog-feed">
-    <div class="loading">
-      <div class="loader"></div>
-      Fetching GitHub contributions...
-    </div>
-  </div>
-
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-
-  <div class="eyebrow">03 / ABOUT THIS JOURNEY</div>
-
-  <div class="about-card">
-
-    <div>
-      <h2>Always building.<br>
-        <span class="gradient-text">Always learning.</span>
-      </h2>
-
-      <p>
-        Software development is more than writing code.
-        It's about solving problems, understanding systems,
-        sharing knowledge and continuously improving.
-        This journal is a small window into that journey.
+      <p class="hero-description" data-i18n="heroDescription">
+        .NET, Entity Framework Core ve yazılım geliştirme dünyasından
+        notlarım. Açık kaynak katkılarım, öğrendiklerim ve geliştirdiğim
+        çözümler.
       </p>
 
-      <a href="https://github.com/ilkertskn"
-         target="_blank"
-         rel="noopener noreferrer"
-         class="primary-btn">
-        Explore GitHub ↗
-      </a>
+      <div class="hero-links">
+        <a href="#journal" class="hero-btn primary" data-i18n="heroButton">
+          Yazıları İncele →
+        </a>
+
+        <a href="https://github.com/ilkertskn"
+           target="_blank"
+           class="hero-btn secondary">
+          GitHub Profile ↗
+        </a>
+      </div>
+
     </div>
 
-    <div class="about-code">
-      <div style="color:#64748b">// The mindset</div>
-      <br>
-      Learn();<br>
-      Build();<br>
-      Contribute();<br>
-      Repeat();<br>
-      <br>
-      <span style="color:#4ade80">// Never stop.</span>
+    <div class="hero-profile">
+      <img class="hero-avatar"
+           src="https://github.com/ilkertskn.png"
+           alt="İlker TSKN">
+
+      <div>
+        <h3>İlker TSKN</h3>
+        <p data-i18n="role">Software Developer</p>
+      </div>
     </div>
 
   </div>
+</header>
 
-</section>
+<!-- MAIN -->
 
+<div class="container">
+  <div class="main-layout">
+
+    <!-- LEFT COLUMN -->
+
+    <main id="journal">
+
+      <div class="section-title">
+        <div>
+          <h2>
+            <span class="section-indicator"></span>
+            <span data-i18n="recentTitle">Son Katkılarım</span>
+          </h2>
+          <p data-i18n="recentDescription">
+            Açık kaynak projelerine yaptığım katkılar
+          </p>
+        </div>
+
+        <a href="https://github.com/dotnet/efcore/pulls?q=is%3Apr+author%3Ailkertskn"
+           target="_blank"
+           class="view-all" data-i18n="viewAll">
+          Tümünü Gör →
+        </a>
+      </div>
+
+      <!-- STATS -->
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <div class="stat-label" data-i18n="statTotal">TOPLAM PR</div>
+          <div class="stat-number" id="total-count">—</div>
+          <div class="stat-detail" data-i18n="statTotalDetail">Pull Requests</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label" data-i18n="statMerged">BİRLEŞTİRİLDİ</div>
+          <div class="stat-number" id="merged-count">—</div>
+          <div class="stat-detail" data-i18n="statMergedDetail">Merged PRs</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label" data-i18n="statOpen">AÇIK</div>
+          <div class="stat-number" id="open-count">—</div>
+          <div class="stat-detail" data-i18n="statOpenDetail">Under review</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label" data-i18n="statClosed">KAPATILDI</div>
+          <div class="stat-number" id="closed-count">—</div>
+          <div class="stat-detail" data-i18n="statClosedDetail">Closed PRs</div>
+        </div>
+
+      </div>
+
+      <!-- FILTERS -->
+
+      <div class="blog-toolbar">
+
+        <div class="search-box">
+          <span class="search-symbol">⌕</span>
+          <input
+            type="search"
+            id="search"
+            data-i18n-placeholder="searchPlaceholder"
+            placeholder="Katkılarda ara..."
+            oninput="renderPRs()">
+        </div>
+
+        <div class="filters">
+
+          <button class="filter-btn active"
+                  data-filter="all"
+                  onclick="setFilter('all',this)"
+                  data-i18n="filterAll">
+            Tümü
+          </button>
+
+          <button class="filter-btn"
+                  data-filter="merged"
+                  onclick="setFilter('merged',this)"
+                  data-i18n="filterMerged">
+            Merged
+          </button>
+
+          <button class="filter-btn"
+                  data-filter="open"
+                  onclick="setFilter('open',this)"
+                  data-i18n="filterOpen">
+            Açık
+          </button>
+
+          <button class="filter-btn"
+                  data-filter="closed"
+                  onclick="setFilter('closed',this)"
+                  data-i18n="filterClosed">
+            Kapalı
+          </button>
+
+        </div>
+      </div>
+
+      <div class="feed-info">
+        <span id="result-count">Yükleniyor...</span>
+        <span>DOTNET / EFCORE</span>
+      </div>
+
+      <div id="blog-feed">
+        <div class="loading">GitHub verileri yükleniyor...</div>
+      </div>
+
+    </main>
+
+    <!-- RIGHT SIDEBAR -->
+
+    <aside class="sidebar" id="about">
+
+      <!-- PROFILE -->
+
+      <section class="side-card">
+
+        <h3 class="side-title" data-i18n="aboutTitle">Hakkımda</h3>
+
+        <div class="profile-row">
+          <img src="https://github.com/ilkertskn.png"
+               alt="İlker TSKN">
+
+          <div>
+            <strong>İlker TSKN</strong>
+            <span data-i18n="role">Software Developer</span>
+          </div>
+        </div>
+
+        <p class="profile-description" data-i18n="aboutDescription">
+          Yazılım geliştirme, açık kaynak projeleri ve modern
+          teknolojiler üzerine çalışıyorum. Bu blogda teknik
+          çalışmalarımı ve deneyimlerimi paylaşıyorum.
+        </p>
+
+        <div class="social-links">
+          <a href="https://github.com/ilkertskn"
+             target="_blank">GitHub ↗</a>
+          <a href="https://github.com/dotnet/efcore"
+             target="_blank">EF Core ↗</a>
+        </div>
+
+      </section>
+
+      <!-- TECHNOLOGIES -->
+
+      <section class="side-card">
+
+        <h3 class="side-title" data-i18n="techTitle">İlgi Alanları</h3>
+
+        <div class="tech-list">
+          <span class="tech-item">.NET</span>
+          <span class="tech-item">C#</span>
+          <span class="tech-item">EF Core</span>
+          <span class="tech-item">ASP.NET Core</span>
+          <span class="tech-item">SQL</span>
+          <span class="tech-item">Git</span>
+          <span class="tech-item">Open Source</span>
+        </div>
+
+      </section>
+
+      <!-- CONTRIBUTION -->
+
+      <section class="contribution-card">
+
+        <h3 data-i18n="contributionTitle">Katkı Aktivitesi</h3>
+
+        <div class="contribution-description"
+             data-i18n="contributionDescription">
+          2026 PR oluşturma takvimi
+        </div>
+
+        <div class="contribution-grid"
+             id="contribution-grid"></div>
+
+        <div class="contribution-legend">
+          <span data-i18n="less">Az</span>
+          <span class="contribution-cell"></span>
+          <span class="contribution-cell level-1"></span>
+          <span class="contribution-cell level-2"></span>
+          <span class="contribution-cell level-3"></span>
+          <span class="contribution-cell level-4"></span>
+          <span data-i18n="more">Çok</span>
+        </div>
+
+      </section>
+
+      <!-- ARCHIVE -->
+
+      <section class="side-card">
+
+        <h3 class="side-title" data-i18n="archiveTitle">Arşiv</h3>
+
+        <div class="archive-item">
+          <span>2026</span>
+          <span class="archive-count" id="archive-count">— PR</span>
+        </div>
+
+        <div class="archive-item">
+          <span data-i18n="repository">Repository</span>
+          <span class="archive-count">EF Core</span>
+        </div>
+
+        <div class="archive-item">
+          <span data-i18n="platform">Platform</span>
+          <span class="archive-count">GitHub</span>
+        </div>
+
+      </section>
+
+    </aside>
+
+  </div>
 </div>
+
+<!-- FOOTER -->
 
 <footer>
   <div class="footer-inner">
-    <span>© 2026 İlker · Built with curiosity.</span>
+    <span>© 2026 İlker TSKN. <span data-i18n="footerRights">Tüm hakları saklıdır.</span></span>
+
     <span>
-      Powered by
-      <a href="https://github.com"
-         target="_blank">GitHub API</a>
-      · Made for the love of code.
+      <span data-i18n="footerBuilt">GitHub API ile geliştirildi.</span>
+      <a href="https://github.com/ilkertskn"
+         target="_blank">GitHub ↗</a>
     </span>
   </div>
 </footer>
 
 <script>
-/* ==================================
-   GITHUB CONFIGURATION
-================================== */
+
+/* ==========================================
+   CONFIGURATION
+========================================== */
 
 const OWNER = "dotnet";
 const REPO = "efcore";
@@ -1026,12 +1189,182 @@ const YEAR = 2026;
 
 let allPRs = [];
 let currentFilter = "all";
+let currentLanguage = "tr";
 
 const feed = document.getElementById("blog-feed");
 
-/* ==================================
+/* ==========================================
+   TRANSLATIONS
+========================================== */
+
+const translations = {
+  tr: {
+    navHome: "Ana Sayfa",
+    navBlog: "Blog",
+    navAbout: "Hakkımda",
+
+    heroLabel: "YAZILIM GELİŞTİRME GÜNLÜĞÜ",
+    heroTitle: "Geliştirme Günlüğü",
+    heroDescription:
+      ".NET, Entity Framework Core ve yazılım geliştirme dünyasından notlarım. Açık kaynak katkılarım, öğrendiklerim ve geliştirdiğim çözümler.",
+    heroButton: "Yazıları İncele →",
+    role: "Yazılım Geliştiricisi",
+
+    recentTitle: "Son Katkılarım",
+    recentDescription: "Açık kaynak projelerine yaptığım katkılar",
+    viewAll: "Tümünü Gör →",
+
+    statTotal: "TOPLAM PR",
+    statTotalDetail: "Pull Request",
+    statMerged: "BİRLEŞTİRİLDİ",
+    statMergedDetail: "Merged PR",
+    statOpen: "AÇIK",
+    statOpenDetail: "İnceleniyor",
+    statClosed: "KAPATILDI",
+    statClosedDetail: "Kapalı PR",
+
+    searchPlaceholder: "Katkılarda ara...",
+    filterAll: "Tümü",
+    filterMerged: "Merged",
+    filterOpen: "Açık",
+    filterClosed: "Kapalı",
+
+    aboutTitle: "Hakkımda",
+    aboutDescription:
+      "Yazılım geliştirme, açık kaynak projeleri ve modern teknolojiler üzerine çalışıyorum. Bu blogda teknik çalışmalarımı ve deneyimlerimi paylaşıyorum.",
+
+    techTitle: "İlgi Alanları",
+    contributionTitle: "Katkı Aktivitesi",
+    contributionDescription: "2026 PR oluşturma takvimi",
+
+    less: "Az",
+    more: "Çok",
+
+    archiveTitle: "Arşiv",
+    repository: "Repository",
+    platform: "Platform",
+
+    footerRights: "Tüm hakları saklıdır.",
+    footerBuilt: "GitHub API ile geliştirildi.",
+
+    loading: "GitHub verileri yükleniyor...",
+    empty: "Bu filtreye uygun bir katkı bulunamadı.",
+    noResults: "Arama kriterlerine uygun sonuç bulunamadı.",
+    errorTitle: "GitHub bağlantı hatası",
+    errorRetry: "Tekrar dene",
+    viewPR: "Detayları Gör →",
+    resultLabel: "KATKI",
+    mergedStatus: "BİRLEŞTİRİLDİ",
+    openStatus: "AÇIK",
+    closedStatus: "KAPATILDI",
+    pullRequest: "Pull Request",
+    noDescription: "Bu PR için açıklama eklenmemiş."
+  },
+
+  en: {
+    navHome: "Home",
+    navBlog: "Blog",
+    navAbout: "About",
+
+    heroLabel: "SOFTWARE DEVELOPMENT JOURNAL",
+    heroTitle: "Engineering Journal",
+    heroDescription:
+      "Notes from the world of .NET, Entity Framework Core and software development. My open-source contributions, things I've learned and solutions I've built.",
+    heroButton: "Explore Articles →",
+    role: "Software Developer",
+
+    recentTitle: "Recent Contributions",
+    recentDescription: "My contributions to open-source projects",
+    viewAll: "View All →",
+
+    statTotal: "TOTAL PRs",
+    statTotalDetail: "Pull Requests",
+    statMerged: "MERGED",
+    statMergedDetail: "Merged PRs",
+    statOpen: "OPEN",
+    statOpenDetail: "Under review",
+    statClosed: "CLOSED",
+    statClosedDetail: "Closed PRs",
+
+    searchPlaceholder: "Search contributions...",
+    filterAll: "All",
+    filterMerged: "Merged",
+    filterOpen: "Open",
+    filterClosed: "Closed",
+
+    aboutTitle: "About Me",
+    aboutDescription:
+      "I work on software development, open-source projects and modern technologies. This blog is where I share my technical work and experiences.",
+
+    techTitle: "Areas of Interest",
+    contributionTitle: "Contribution Activity",
+    contributionDescription: "2026 PR creation calendar",
+
+    less: "Less",
+    more: "More",
+
+    archiveTitle: "Archive",
+    repository: "Repository",
+    platform: "Platform",
+
+    footerRights: "All rights reserved.",
+    footerBuilt: "Powered by GitHub API.",
+
+    loading: "Loading GitHub data...",
+    empty: "No contributions found for this filter.",
+    noResults: "No matching search results found.",
+    errorTitle: "GitHub connection error",
+    errorRetry: "Try again",
+    viewPR: "View details →",
+    resultLabel: "CONTRIBUTIONS",
+    mergedStatus: "MERGED",
+    openStatus: "OPEN",
+    closedStatus: "CLOSED",
+    pullRequest: "Pull Request",
+    noDescription: "No description provided for this PR."
+  }
+};
+
+/* ==========================================
+   LANGUAGE
+========================================== */
+
+function setLanguage(language) {
+  currentLanguage = language;
+
+  document.documentElement.lang = language;
+
+  document.getElementById("langToggle").textContent =
+    language === "tr" ? "EN" : "TR";
+
+  const t = translations[language];
+
+  document.querySelectorAll("[data-i18n]").forEach(element => {
+    const key = element.dataset.i18n;
+
+    if (t[key] !== undefined) {
+      element.textContent = t[key];
+    }
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(element => {
+    const key = element.dataset.i18nPlaceholder;
+
+    if (t[key] !== undefined) {
+      element.placeholder = t[key];
+    }
+  });
+
+  renderPRs();
+}
+
+function toggleLanguage() {
+  setLanguage(currentLanguage === "tr" ? "en" : "tr");
+}
+
+/* ==========================================
    HELPERS
-================================== */
+========================================== */
 
 function escapeHTML(value) {
   return String(value ?? "").replace(/[&<>"']/g, c => ({
@@ -1044,19 +1377,24 @@ function escapeHTML(value) {
 }
 
 function formatDate(date) {
-  return new Date(date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric"
-  });
+  return new Date(date).toLocaleDateString(
+    currentLanguage === "tr" ? "tr-TR" : "en-US",
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    }
+  );
 }
 
 function getStatus(pr) {
+  const t = translations[currentLanguage];
+
   if (pr.merged_at) {
     return {
       key: "merged",
       className: "tag-merged",
-      text: "MERGED"
+      text: t.mergedStatus
     };
   }
 
@@ -1064,37 +1402,35 @@ function getStatus(pr) {
     return {
       key: "closed",
       className: "tag-closed",
-      text: "CLOSED"
+      text: t.closedStatus
     };
   }
 
   return {
     key: "open",
     className: "tag-open",
-    text: "OPEN"
+    text: t.openStatus
   };
 }
 
-/* ==================================
-   CONTRIBUTION GRID
-================================== */
+/* ==========================================
+   CONTRIBUTION CALENDAR
+========================================== */
 
 function renderContributionGrid(prs) {
   const grid = document.getElementById("contribution-grid");
   const counts = {};
 
   prs.forEach(pr => {
-    const date = new Date(pr.created_at);
-    const key = date.toISOString().slice(0,10);
+    const key = new Date(pr.created_at)
+      .toISOString().slice(0,10);
+
     counts[key] = (counts[key] || 0) + 1;
   });
 
   grid.innerHTML = "";
 
   const start = new Date(Date.UTC(YEAR,0,1));
-  const end = new Date(Date.UTC(YEAR,11,31));
-
-  // Haftalık sütunlar, günler satırlar.
   const firstDay = start.getUTCDay();
 
   for (let i = 0; i < firstDay; i++) {
@@ -1104,11 +1440,11 @@ function renderContributionGrid(prs) {
   }
 
   for (
-    let current = new Date(start);
-    current <= end;
-    current.setUTCDate(current.getUTCDate()+1)
+    let date = new Date(start);
+    date <= new Date(Date.UTC(YEAR,11,31));
+    date.setUTCDate(date.getUTCDate()+1)
   ) {
-    const key = current.toISOString().slice(0,10);
+    const key = date.toISOString().slice(0,10);
     const count = counts[key] || 0;
 
     let level = 0;
@@ -1119,6 +1455,7 @@ function renderContributionGrid(prs) {
     else if (count > 4) level = 4;
 
     const cell = document.createElement("div");
+
     cell.className = `contribution-cell level-${level}`;
     cell.title = `${key}: ${count} PR`;
 
@@ -1126,14 +1463,41 @@ function renderContributionGrid(prs) {
   }
 }
 
-/* ==================================
+/* ==========================================
+   STATISTICS
+========================================== */
+
+function renderStats(prs) {
+  const merged = prs.filter(p => p.merged_at).length;
+
+  const open = prs.filter(
+    p => p.state === "open"
+  ).length;
+
+  const closed = prs.filter(
+    p => p.state === "closed" && !p.merged_at
+  ).length;
+
+  document.getElementById("total-count").textContent = prs.length;
+  document.getElementById("merged-count").textContent = merged;
+  document.getElementById("open-count").textContent = open;
+  document.getElementById("closed-count").textContent = closed;
+
+  document.getElementById("archive-count").textContent =
+    `${prs.length} PR`;
+
+  renderContributionGrid(prs);
+}
+
+/* ==========================================
    PR CARD
-================================== */
+========================================== */
 
-function createCard(pr, index) {
+function createCard(pr) {
   const status = getStatus(pr);
+  const t = translations[currentLanguage];
 
-  const description = (pr.body || "No detailed description provided.")
+  const description = (pr.body || t.noDescription)
     .replace(/[#*`>]/g, "")
     .trim();
 
@@ -1148,61 +1512,57 @@ function createCard(pr, index) {
   `).join("");
 
   return `
-    <article class="post-card" style="animation-delay:${Math.min(index * 0.04,0.4)}s">
+    <article class="post-card">
 
-      <div class="post-top">
+      <div class="post-meta">
 
         <div class="post-author">
           <img
             src="${escapeHTML(pr.user.avatar_url)}"
             alt="${escapeHTML(pr.user.login)}"
-            loading="lazy"
-          >
+            loading="lazy">
 
-          <span>
-            <strong style="color:#e2e8f0">
-              ${escapeHTML(pr.user.login)}
-            </strong>
-            <br>
-            <span style="font-size:10px">
-              Pull Request #${pr.number}
-            </span>
-          </span>
+          <strong>${escapeHTML(pr.user.login)}</strong>
         </div>
 
         <span class="post-date">
           ${formatDate(pr.created_at)}
         </span>
 
+        <span class="post-date">
+          #${pr.number}
+        </span>
+
       </div>
 
       <h3 class="post-title">
-        <a href="${escapeHTML(pr.html_url)}"
-           target="_blank"
-           rel="noopener noreferrer">
+        <a
+          href="${escapeHTML(pr.html_url)}"
+          target="_blank"
+          rel="noopener noreferrer">
           ${escapeHTML(pr.title)}
         </a>
       </h3>
 
       <p class="post-excerpt">
-        ${escapeHTML(excerpt || "No description available.")}
+        ${escapeHTML(excerpt)}
       </p>
 
-      <div class="post-bottom">
+      <div class="post-footer">
 
         <div class="tags">
           <span class="tag ${status.className}">
             ${status.text}
           </span>
-
           ${labels}
         </div>
 
-        <a class="read-more"
-           href="${escapeHTML(pr.html_url)}"
-           target="_blank"
-           rel="noopener noreferrer">
-          View pull request ↗
+        <a
+          class="read-more"
+          href="${escapeHTML(pr.html_url)}"
+          target="_blank"
+          rel="noopener noreferrer">
+          ${t.viewPR}
         </a>
 
       </div>
@@ -1211,28 +1571,9 @@ function createCard(pr, index) {
   `;
 }
 
-/* ==================================
-   STATISTICS
-================================== */
-
-function renderStats(prs) {
-  const merged = prs.filter(p => p.merged_at).length;
-  const open = prs.filter(p => p.state === "open").length;
-  const closed = prs.filter(
-    p => p.state === "closed" && !p.merged_at
-  ).length;
-
-  document.getElementById("total-count").textContent = prs.length;
-  document.getElementById("merged-count").textContent = merged;
-  document.getElementById("open-count").textContent = open;
-  document.getElementById("closed-count").textContent = closed;
-
-  renderContributionGrid(prs);
-}
-
-/* ==================================
-   FILTERS & SEARCH
-================================== */
+/* ==========================================
+   SEARCH & FILTER
+========================================== */
 
 function setFilter(filter, button) {
   currentFilter = filter;
@@ -1247,6 +1588,8 @@ function setFilter(filter, button) {
 }
 
 function renderPRs() {
+  const t = translations[currentLanguage];
+
   const search = document
     .getElementById("search")
     .value.toLowerCase()
@@ -1262,8 +1605,8 @@ function renderPRs() {
     const matchesSearch =
       pr.title.toLowerCase().includes(search) ||
       (pr.body || "").toLowerCase().includes(search) ||
-      (pr.labels || []).some(l =>
-        l.name.toLowerCase().includes(search)
+      (pr.labels || []).some(label =>
+        label.name.toLowerCase().includes(search)
       );
 
     return matchesFilter && matchesSearch;
@@ -1274,14 +1617,12 @@ function renderPRs() {
   );
 
   document.getElementById("result-count").textContent =
-    `${filtered.length} CONTRIBUTION${filtered.length !== 1 ? "S" : ""}`;
+    `${filtered.length} ${t.resultLabel}`;
 
   if (!filtered.length) {
     feed.innerHTML = `
       <div class="empty">
-        <div style="font-size:30px;margin-bottom:10px">⌕</div>
-        <strong>No contributions found.</strong>
-        <p>Try another search or filter.</p>
+        ${search ? t.noResults : t.empty}
       </div>
     `;
     return;
@@ -1290,22 +1631,20 @@ function renderPRs() {
   feed.innerHTML = filtered.map(createCard).join("");
 }
 
-/* ==================================
+/* ==========================================
    GITHUB API
-================================== */
+   SAME WORKING ENDPOINT
+========================================== */
 
 async function loadPRs() {
-  feed.innerHTML = `
-    <div class="loading">
-      <div class="loader"></div>
-      Fetching GitHub contributions...
-    </div>
-  `;
+  const t = translations[currentLanguage];
+
+  feed.innerHTML = `<div class="loading">${t.loading}</div>`;
 
   try {
+    let allResults = [];
     let page = 1;
     let hasMore = true;
-    let fetchedPRs = [];
 
     while (hasMore && page <= 10) {
 
@@ -1313,46 +1652,44 @@ async function loadPRs() {
         `https://api.github.com/repos/${OWNER}/${REPO}/pulls`
       );
 
-      url.searchParams.set("state","all");
-      url.searchParams.set("per_page","100");
-      url.searchParams.set("page",page);
-      url.searchParams.set("sort","created");
-      url.searchParams.set("direction","desc");
+      url.searchParams.set("state", "all");
+      url.searchParams.set("per_page", "100");
+      url.searchParams.set("page", page);
+      url.searchParams.set("sort", "created");
+      url.searchParams.set("direction", "desc");
 
-      const response = await fetch(url.toString(), {
-        headers: {
-          "Accept": "application/vnd.github+json"
-        }
-      });
+      const response = await fetch(url.toString());
 
       if (!response.ok) {
         throw new Error(
-          `GitHub API Error: ${response.status} ${response.statusText}`
+          `GitHub API HTTP ${response.status}: ${response.statusText}`
         );
       }
 
       const prs = await response.json();
 
-      fetchedPRs = fetchedPRs.concat(prs);
+      allResults = allResults.concat(prs);
 
       hasMore = prs.length === 100;
       page++;
 
-      // Eski PR'lara ulaşılınca gereksiz istekleri durdur.
-      if (prs.length && YEAR > 0) {
+      if (prs.length > 0) {
         const oldest = prs[prs.length - 1];
-        if (new Date(oldest.created_at).getFullYear() < YEAR) {
+
+        if (
+          new Date(oldest.created_at).getUTCFullYear() < YEAR
+        ) {
           break;
         }
       }
     }
 
-    allPRs = fetchedPRs.filter(pr => {
+    allPRs = allResults.filter(pr => {
       const date = new Date(pr.created_at);
 
       return (
         pr.user.login.toLowerCase() === USERNAME.toLowerCase() &&
-        date.getFullYear() === YEAR
+        date.getUTCFullYear() === YEAR
       );
     });
 
@@ -1360,22 +1697,27 @@ async function loadPRs() {
     renderPRs();
 
   } catch (error) {
-    console.error("GitHub API Error:",error);
+    console.error("GitHub API Error:", error);
 
     feed.innerHTML = `
       <div class="error">
-        <h3>Unable to load contributions</h3>
+        <strong>${t.errorTitle}</strong>
         <p>${escapeHTML(error.message)}</p>
-        <button onclick="loadPRs()">Try again</button>
+        <button
+          onclick="loadPRs()"
+          style="padding:9px 15px;border:0;border-radius:5px;background:#283f79;color:white;cursor:pointer">
+          ${t.errorRetry}
+        </button>
       </div>
     `;
   }
 }
 
-/* ==================================
-   START
-================================== */
+/* ==========================================
+   INITIALIZE
+========================================== */
 
+setLanguage("tr");
 loadPRs();
 
 </script>
